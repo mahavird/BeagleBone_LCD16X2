@@ -6,8 +6,4 @@ Interfacing 16x2 LCD with general microcontrollers(Including Arduino) is quite s
 
 WhereAs while Interfacing LCD with Beaglebone you do need a working code along with that you have to setup the Beaglebone Pins for the task.
 
-For configuring the GPIO pins in Output Pullup mode , go through Derek Molloy's Device Tree Overlay tutorial:http://derekmolloy.ie/gpios-on-the-beaglebone-black-using-device-tree-overlays/
 
-Also go through the Derek Molloy's github repository for Device Tree Overlays https://github.com/derekmolloy/boneDeviceTree
-
-After setting up the Overlays, compile the LCD code using python for printing thestring on the LCD 

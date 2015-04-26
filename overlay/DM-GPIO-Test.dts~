@@ -1,0 +1,56 @@
+/*  
+* Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Purpose License Version 2 as
+* published by the Free Software Foundation
+*
+* Original from: github.com/jadonk/validation-scripts/blob/master/test-capemgr/ 
+*
+* Modified by Mahavir Dwivedi
+* that maps GPIO pins in pull up mode for the LCD16X2 example
+*/
+
+/dts-v1/;
+/plugin/;
+
+/{
+       compatible = "ti,beaglebone", "ti,beaglebone-black";
+       part-number = "DM-GPIO-Test";
+       version = "00A0";
+
+       fragment@0 {
+             target = <&am33xx_pinmux>;
+            
+             __overlay__ {
+                  pinctrl_test: DM_GPIO_Test_Pins {
+			pinctrl-single,pins = <
+
+				
+				0x030 0x17  /* P8_12 44 OUTPUT  MODE7 pullup 	- RS PIN*/
+				0x024 0x17  /* P8_13 23 OUTPUT  MODE7 pullup    - ENABLE PIN*/
+				0x03c 0x17  /* P8_15 47 OUTPUT 	MODE7 pullup	- The D4 PIN*/
+				0x02c 0x17  /* P8_17 27 OUTPUT  MODE7 pullup    - The D5 PIN*/
+				0x08c 0x17  /* P8_18 65 OUTPUT  MODE7 pullup   	- The D6 PIN*/
+				0x020 0x17  /* P8_19 22 OUTPUT  MODE7 pullup   	- The D7 PIN*/                       		
+
+                               /* OUTPUT  GPIO(mode7) 0x07 pulldown, 0x17 pullup, 0x?f no pullup/down */
+			       /* INPUT   GPIO(mode7) 0x27 pulldown, 0x37 pullup, 0x?f no pullup/down */
+
+			>;
+		  };
+             };
+       };
+
+       fragment@1 {
+		target = <&ocp>;
+		__overlay__ {
+			test_helper: helper {
+				compatible = "bone-pinmux-helper";
+				pinctrl-names = "default";
+				pinctrl-0 = <&pinctrl_test>;
+				status = "okay";
+			};
+		};
+	};
+};
